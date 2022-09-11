@@ -47,3 +47,12 @@ class usermgr:
             return {"message": "done."}
         else:
             return {"message": f"error: no such user {uid}"}
+
+    def set_user_prop(self, uid, key, val):
+        if self.check_user_exists(uid):
+            obj = self.get_user(uid)
+            obj[key] = val
+            self.write_user(uid, obj)
+            return {"message": "done"}
+        else:
+            return {"message": f"error: no such user {uid}"}
