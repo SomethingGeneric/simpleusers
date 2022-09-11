@@ -56,3 +56,6 @@ class usermgr:
             return {"message": "done"}
         else:
             return {"message": f"error: no such user {uid}"}
+
+    def dump_users(self):
+        return os.listdir(self.srcdir)
