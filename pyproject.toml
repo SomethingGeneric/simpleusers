@@ -4,9 +4,9 @@ build-backend = "hatchling.build"
 
 [project]
 name = "simpleusers"
-version = "0.0.6"
+version = "0.0.7"
 authors = [
-  { name="Matt C", email="matt@tar.black" },
+  { name="Matt C", email="matt@xhec.dev" },
 ]
 description = "A small user db library"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencuies = [
+dependencies = [
     "PyYAML",
     "passlib"
 ]
