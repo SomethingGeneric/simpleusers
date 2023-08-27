@@ -1,7 +1,7 @@
 setup:
 	pip3 install black twine build pdoc3
 docs:
-	pdoc3 -o docs src/simpleusers
+	pdoc3 --html -o docs src/simpleusers/users.py
 format: setup
 	black .
 build: format
