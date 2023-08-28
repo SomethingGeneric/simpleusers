@@ -96,7 +96,7 @@ class usermgr:
         Returns:
             None
         """
-        obj = {"passw": pbkdf2_sha256.hash(passw)}
+        obj = {"passw": pbkdf2_sha256.hash(passw), "tokens": {}}
         self.write_user(uid, obj)
 
     def set_user_password(self, uid, newpass):
@@ -147,3 +147,48 @@ class usermgr:
             list: List of user filenames.
         """
         return os.listdir(self.srcdir)
+
+    def set_auth_token(self, uid, ip, token):
+        """
+        Sets an authentication token for a user by IP address.
+
+        Returns:
+            bool: success
+        """
+
+        if self.check_user_exists(uid):
+            obj = self.get_user(uid)
+            obj["tokens"][ip] = token
+            self.write_user(uid, obj)
+            return True
+        else:
+            return False
+
+    def expire_auth_token(self, uid, ip):
+        """
+        Expire auth token for user by ip address.
+        """
+
+        if self.check_user_exists(uid):
+            obj = self.get_user(uid)
+            obj["tokens"][ip] = ""
+            self.write_user(uid, obj)
+            return True
+        else:
+            return False
+
+    def auth_user_with_token(self, uid, token):
+        """
+        Check if token is valid for user
+
+        Returns:
+            bool: success
+        """
+
+        if self.check_user_exists(uid):
+            obj = self.get_user(uid)
+            for ip in obj["tokens"]:
+                if obj["tokens"][ip] == token:
+                    return True
+
+        return False
